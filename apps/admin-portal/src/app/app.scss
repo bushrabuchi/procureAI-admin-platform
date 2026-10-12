@@ -1,0 +1,84 @@
+:host {
+  display: block;
+  min-height: 100dvh;
+}
+
+.app-shell {
+  display: flex;
+  width: 100%;
+  min-height: 100dvh;
+  background: var(--page-bg);
+}
+
+.sidebar-container {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  width: 250px;
+  height: 100dvh;
+  flex: 0 0 250px;
+}
+
+.main-container {
+  display: flex;
+  min-width: 0;
+  min-height: 100dvh;
+  flex: 1 1 auto;
+  flex-direction: column;
+}
+
+.page-content {
+  width: 100%;
+  min-width: 0;
+  flex: 1 0 auto;
+  padding: clamp(20px, 2.4vw, 36px);
+}
+
+.mobile-menu-button {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .sidebar-container {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100dvh;
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+  }
+
+  .sidebar-container.open {
+    transform: translateX(0);
+  }
+
+  .mobile-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 25;
+    background: #06141b80;
+    backdrop-filter: blur(2px);
+  }
+
+  .mobile-menu-button {
+    display: block;
+    width: 100%;
+    padding: 11px 16px;
+    border: 0;
+    border-bottom: 1px solid var(--border-color);
+    background: var(--card-bg);
+    color: var(--text-primary);
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .page-content {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 550px) {
+  .page-content {
+    padding: 16px 12px;
+  }
+}

@@ -1,0 +1,82 @@
+<header class="topbar">
+  <div class="page-heading">
+    <h2>Procurement Workspace</h2>
+    <p>Manage your operations efficiently</p>
+  </div>
+
+  <div class="header-actions">
+    <div class="search-box">
+      <app-icon [img]="icons.Search" [size]="18"></app-icon>
+      <input
+        type="search"
+        placeholder="Search..."
+        [ngModel]="search()"
+        (ngModelChange)="search.set($event)"
+      />
+    </div>
+
+    <button
+      class="icon-button"
+      type="button"
+      aria-label="Toggle theme"
+      (click)="theme.toggleTheme()"
+    >
+      @if (theme.isDark()) {
+        <app-icon [img]="icons.Sun"></app-icon>
+      } @else {
+        <app-icon [img]="icons.Moon"></app-icon>
+      }
+    </button>
+
+    <div class="dropdown-wrapper">
+      <button
+        class="icon-button"
+        type="button"
+        aria-label="Notifications"
+        [attr.aria-expanded]="notificationsOpen()"
+        (click)="toggleNotifications()"
+      >
+        <app-icon [img]="icons.Bell"></app-icon>
+        <span class="notification-dot"></span>
+      </button>
+
+      @if (notificationsOpen()) {
+        <div class="dropdown notifications">
+          <strong>Notifications</strong>
+          @for (item of notifications; track item) {
+            <p>{{ item }}</p>
+          }
+        </div>
+      }
+    </div>
+
+    <div class="dropdown-wrapper">
+      <button
+        class="profile-button"
+        type="button"
+        [attr.aria-expanded]="profileOpen()"
+        (click)="toggleProfile()"
+      >
+        <span class="avatar">AD</span>
+        <span class="profile-name">Admin</span>
+        <app-icon [img]="icons.ChevronDown" [size]="15"></app-icon>
+      </button>
+
+      @if (profileOpen()) {
+        <div class="dropdown profile-dropdown">
+          <div class="profile-dropdown-heading">
+            <span class="avatar">AD</span>
+            <span class="profile-dropdown-identity">
+              <strong>Admin User</strong>
+              <small>Procurement Administrator</small>
+            </span>
+          </div>
+          <a class="dropdown-action" routerLink="/settings">
+            <span class="material-symbols-outlined" aria-hidden="true">manage_accounts</span>
+            <span>{{ 'Account settings' }}</span>
+          </a>
+        </div>
+      }
+    </div>
+  </div>
+</header>

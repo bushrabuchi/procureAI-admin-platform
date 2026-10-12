@@ -1,0 +1,28 @@
+<aside class="sidebar">
+  <div class="brand">
+    <div class="brand-icon">P</div>
+    <div class="brand-name">
+      Procure<span>AI</span>
+      <small>ENTERPRISE PLATFORM</small>
+    </div>
+  </div>
+
+  <div class="menu-label">WORKSPACE</div>
+
+  <nav class="nav-menu">
+    <a
+      *ngFor="let item of menu"
+      [routerLink]="item.route"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      <app-icon [img]="item.icon" [size]="20"> </app-icon>
+      <span>{{ item.label }}</span>
+    </a>
+  </nav>
+
+  <div class="sidebar-footer">
+    <div class="workspace-badge">Enterprise Workspace</div>
+    <p>ProcureAI v1.0</p>
+  </div>
+</aside>

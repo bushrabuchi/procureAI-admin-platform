@@ -1,0 +1,123 @@
+<section class="dashboard">
+  <div class="page-header">
+    <div>
+      <span class="eyebrow">PROCUREMENT ANALYTICS</span>
+      <h1>Dashboard overview</h1>
+      <p>Monitor procurement performance and supplier activity.</p>
+    </div>
+    <span class="demo-badge">Demo Data</span>
+  </div>
+
+  <div class="metrics-grid">
+    @for (metric of metrics(); track metric.label) {
+      <article class="metric-card">
+        <div class="metric-top">
+          <span>{{ metric.label }}</span>
+          <span class="metric-icon">
+            <app-icon [img]="metric.icon" [size]="19"></app-icon>
+          </span>
+        </div>
+
+        <div class="metric-value">
+          @if (metric.kind === 'money') {
+            {{ metric.value | currency: 'SAR' : 'symbol' : '1.0-0' }}
+          } @else {
+            {{ metric.value | number }}
+          }
+        </div>
+
+        <span class="metric-change" [class.attention]="metric.label === 'Pending Approvals'">
+          <span class="change-dot"></span>
+          {{ metric.change }}
+        </span>
+      </article>
+    }
+  </div>
+
+  <div class="charts-grid">
+    <section class="panel spending-panel">
+      <div class="panel-heading">
+        <div>
+          <h3>Procurement Spending</h3>
+          <p>Monthly spending overview in SAR</p>
+        </div>
+        <span class="panel-period">Last 6 months</span>
+      </div>
+      <div #spendingChart class="chart"></div>
+    </section>
+
+    <section class="panel status-panel">
+      <div class="panel-heading">
+        <div>
+          <h3>Order Status</h3>
+          <p>Purchase order distribution</p>
+        </div>
+      </div>
+
+      <div class="status-list">
+        @for (status of statuses; track status.label) {
+          <div class="status-item">
+            <div class="status-label">
+              <span>{{ status.label }}</span>
+              <strong>{{ status.count }}</strong>
+            </div>
+            <div class="progress-track">
+              <div
+                class="progress-fill"
+                [class.approved]="status.label === 'Approved'"
+                [class.processing]="status.label === 'Processing'"
+                [class.pending]="status.label === 'Pending'"
+                [class.rejected]="status.label === 'Rejected'"
+                [style.width.%]="(status.count / 1284) * 100"
+              ></div>
+            </div>
+          </div>
+        }
+      </div>
+    </section>
+  </div>
+
+  <section class="panel orders-panel">
+    <div class="panel-heading">
+      <div>
+        <h3>Recent Purchase Orders</h3>
+        <p>Latest procurement transactions</p>
+      </div>
+    </div>
+
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Order ID</th>
+            <th>Supplier</th>
+            <th>Amount</th>
+            <th>Date</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (order of orders(); track order.id) {
+            <tr>
+              <td class="order-id">{{ order.id }}</td>
+              <td>{{ order.supplier }}</td>
+              <td>{{ order.amount | currency: 'SAR' : 'symbol' : '1.0-0' }}</td>
+              <td>{{ order.date }}</td>
+              <td>
+                <span
+                  class="status-badge"
+                  [class.approved]="order.status === 'Approved'"
+                  [class.pending]="order.status === 'Pending'"
+                  [class.processing]="order.status === 'Processing'"
+                  [class.rejected]="order.status === 'Rejected'"
+                >
+                  {{ order.status }}
+                </span>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </section>
+</section>

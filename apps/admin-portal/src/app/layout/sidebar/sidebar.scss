@@ -1,0 +1,110 @@
+:host {
+  display: block;
+  height: 100%;
+}
+
+.sidebar {
+  width: 250px;
+  height: 100%;
+  background: var(--sidebar-bg);
+  color: var(--sidebar-text);
+  display: flex;
+  flex-direction: column;
+  padding: 24px 14px;
+  box-sizing: border-box;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 12px;
+  margin-bottom: 45px;
+}
+
+.brand-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  background: #253745;
+  color: #ccd0cf;
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.brand-name {
+  color: white;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+
+  span {
+    color: #9ba8ab;
+  }
+
+  small {
+    display: block;
+    font-size: 9px;
+    letter-spacing: 1.3px;
+    color: var(--sidebar-text);
+  }
+}
+
+.menu-label {
+  padding: 0 14px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  margin-bottom: 15px;
+}
+
+.nav-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  a {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding: 13px 15px;
+    border-radius: 10px;
+    color: var(--sidebar-text);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    transition:
+      background-color 160ms ease,
+      color 160ms ease;
+
+    &:hover {
+      background: #253745;
+      color: #ccd0cf;
+    }
+
+    &.active {
+      background: #253745;
+      color: #ccd0cf;
+      font-weight: 600;
+    }
+  }
+}
+
+.sidebar-footer {
+  margin-top: auto;
+  padding: 15px 10px;
+  font-size: 12px;
+
+  .workspace-badge {
+    padding: 12px;
+    border-radius: 10px;
+    background: #253745;
+    color: #ccd0cf;
+  }
+
+  p {
+    color: var(--sidebar-text);
+  }
+}

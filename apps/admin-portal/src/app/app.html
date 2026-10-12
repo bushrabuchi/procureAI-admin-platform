@@ -1,0 +1,25 @@
+<div class="app-shell">
+  <div class="sidebar-container" [class.open]="mobileMenuOpen()" (click)="closeMenu()">
+    <app-sidebar />
+  </div>
+
+  @if (mobileMenuOpen()) {
+    <div class="mobile-backdrop" (click)="closeMenu()"></div>
+  }
+
+  <div class="main-container">
+    <button
+      class="mobile-menu-button"
+      type="button"
+      (click)="mobileMenuOpen.set(!mobileMenuOpen())"
+    >
+      ☰ Menu
+    </button>
+
+    <app-header />
+
+    <main class="page-content">
+      <router-outlet />
+    </main>
+  </div>
+</div>
