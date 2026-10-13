@@ -1,0 +1,103 @@
+.suppliers-page {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+  }
+
+  .stat-card {
+    padding: 10px;
+
+    mat-card-content {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    mat-icon {
+      color: #2563eb;
+    }
+
+    span {
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: 30px;
+    }
+  }
+
+  .table-card {
+    padding: 12px;
+  }
+
+  .filter-card {
+    padding: 12px;
+  }
+
+  .filters {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+
+    mat-form-field {
+      flex: 1;
+      min-width: 220px;
+    }
+  }
+
+  .table-section {
+    width: 100%;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+  }
+
+  .table-container {
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  table {
+    width: 100%;
+    min-width: 760px;
+  }
+
+  .mat-mdc-row:hover {
+    background: var(--hover-bg);
+  }
+
+  mat-chip {
+    &.active {
+      --mdc-chip-elevated-container-color: #dcfce7;
+      --mdc-chip-label-text-color: #166534;
+    }
+
+    &.pending {
+      --mdc-chip-elevated-container-color: #fef3c7;
+      --mdc-chip-label-text-color: #92400e;
+    }
+
+    &.suspended {
+      --mdc-chip-elevated-container-color: #fee2e2;
+      --mdc-chip-label-text-color: #991b1b;
+    }
+  }
+
+  @media (max-width: 800px) {
+    .stats-grid {
+      grid-template-columns: 1fr;
+    }
+    .page-header {
+      align-items: flex-start;
+    }
+  }
+}

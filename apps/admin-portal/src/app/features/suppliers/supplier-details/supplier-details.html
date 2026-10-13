@@ -1,0 +1,125 @@
+<section class="details-page">
+  <div class="page-header">
+    <a mat-button class="back-link" routerLink="/suppliers">
+      <mat-icon aria-hidden="true">arrow_back</mat-icon>
+    </a>
+
+    <div>
+      <span class="eyebrow">SUPPLIER MANAGEMENT</span>
+      <h1>Supplier details</h1>
+      <p>Review supplier information and account status.</p>
+    </div>
+  </div>
+
+  @if (supplier(); as item) {
+    <mat-card class="supplier-card">
+      <div class="supplier-banner">
+        <div class="supplier-avatar" aria-hidden="true">
+          <mat-icon>storefront</mat-icon>
+        </div>
+
+        <div class="supplier-identity">
+          <span class="eyebrow">SUPPLIER PROFILE</span>
+          <h2>{{ item.name }}</h2>
+          <span class="supplier-id">Supplier ID · {{ item.id }}</span>
+        </div>
+
+        <div class="supplier-actions">
+          <mat-chip
+            class="status-chip"
+            [class.active]="item.status === 'Active'"
+            [class.pending]="item.status === 'Pending'"
+            [class.suspended]="item.status === 'Suspended'"
+          >
+            <span class="status-dot" aria-hidden="true"></span>
+            {{ item.status }}
+          </mat-chip>
+
+          <a mat-flat-button [routerLink]="['/suppliers', item.id, 'edit']">
+            <mat-icon aria-hidden="true">edit</mat-icon>
+            Edit supplier
+          </a>
+        </div>
+      </div>
+
+      <mat-divider></mat-divider>
+
+      <mat-card-content class="supplier-content">
+        <div class="section-heading">
+          <div>
+            <h3>Supplier information</h3>
+            <p>Contact, registration, and classification details.</p>
+          </div>
+          <mat-icon aria-hidden="true">assignment</mat-icon>
+        </div>
+
+        <div class="details-grid">
+          <div class="detail-item">
+            <mat-icon aria-hidden="true">business</mat-icon>
+            <div>
+              <span>Supplier name</span>
+              <strong>{{ item.name }}</strong>
+            </div>
+          </div>
+
+          <div class="detail-item">
+            <mat-icon aria-hidden="true">category</mat-icon>
+            <div>
+              <span>Category</span>
+              <strong>{{ item.category }}</strong>
+            </div>
+          </div>
+
+          <div class="detail-item">
+            <mat-icon aria-hidden="true">mail</mat-icon>
+            <div>
+              <span>Email address</span>
+              <strong>{{ item.email }}</strong>
+            </div>
+          </div>
+
+          <div class="detail-item">
+            <mat-icon aria-hidden="true">call</mat-icon>
+            <div>
+              <span>Phone number</span>
+              <strong>{{ item.phone }}</strong>
+            </div>
+          </div>
+
+          <div class="detail-item">
+            <mat-icon aria-hidden="true">location_on</mat-icon>
+            <div>
+              <span>City</span>
+              <strong>{{ item.city }}</strong>
+            </div>
+          </div>
+
+          <div class="detail-item">
+            <mat-icon aria-hidden="true">fingerprint</mat-icon>
+            <div>
+              <span>VAT number</span>
+              <strong>{{ item.vatNumber }}</strong>
+            </div>
+          </div>
+
+          <div class="detail-item">
+            <mat-icon aria-hidden="true">calendar_today</mat-icon>
+            <div>
+              <span>Registered on</span>
+              <strong>{{ item.createdAt }}</strong>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  } @else {
+    <mat-card class="empty-card">
+      <mat-card-content>
+        <mat-icon aria-hidden="true">person_search</mat-icon>
+        <h2>Supplier not found</h2>
+        <p>This supplier may have been removed or the link may be incorrect.</p>
+        <a mat-stroked-button routerLink="/suppliers">Return to suppliers</a>
+      </mat-card-content>
+    </mat-card>
+  }
+</section>

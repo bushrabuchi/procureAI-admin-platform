@@ -1,1 +1,155 @@
-<p>suppliers works!</p>
+<section class="suppliers-page">
+  <div class="page-header">
+    <div>
+      <h1>Supplier Management</h1>
+      <p>Manage your registered suppliers and their information.</p>
+    </div>
+
+    <a mat-flat-button routerLink="/suppliers/add">
+      <mat-icon>add</mat-icon>
+      Add Supplier
+    </a>
+  </div>
+
+  <div class="stats-grid">
+    <mat-card class="stat-card">
+      <mat-card-content>
+        <mat-icon>groups</mat-icon>
+        <span>Total Suppliers</span>
+        <h2>{{ supplierService.totalSuppliers() }}</h2>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="stat-card">
+      <mat-card-content>
+        <mat-icon>verified</mat-icon>
+        <span>Active Suppliers</span>
+        <h2>{{ supplierService.activeSuppliers() }}</h2>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="stat-card">
+      <mat-card-content>
+        <mat-icon>pending_actions</mat-icon>
+        <span>Pending Suppliers</span>
+        <h2>{{ supplierService.pendingSuppliers() }}</h2>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <mat-card class="filter-card">
+    <div class="filters">
+      <mat-form-field appearance="outline">
+        <mat-label>Search suppliers</mat-label>
+        <mat-icon matPrefix>search</mat-icon>
+        <input
+          matInput
+          [ngModel]="searchTerm()"
+          (ngModelChange)="searchTerm.set($event)"
+          placeholder="Name, email, city..."
+        />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Status</mat-label>
+        <mat-select [ngModel]="selectedStatus()" (ngModelChange)="selectedStatus.set($event)">
+          <mat-option value="All">All Statuses</mat-option>
+          <mat-option value="Active">Active</mat-option>
+          <mat-option value="Pending">Pending</mat-option>
+          <mat-option value="Suspended">Suspended</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </mat-card>
+  <mat-card class="table-card">
+    <mat-card-content>
+      <div class="table-section">
+        <div class="table-container">
+          <table mat-table [dataSource]="dataSource" matSort>
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Supplier Name</th>
+              <td mat-cell *matCellDef="let supplier">
+                <strong>{{ supplier.name }}</strong>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="category">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Category</th>
+              <td mat-cell *matCellDef="let supplier">
+                {{ supplier.category }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="city">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>City</th>
+              <td mat-cell *matCellDef="let supplier">
+                {{ supplier.city }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="email">
+              <th mat-header-cell *matHeaderCellDef>Email</th>
+              <td mat-cell *matCellDef="let supplier">
+                {{ supplier.email }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="status">
+              <th mat-header-cell *matHeaderCellDef>Status</th>
+              <td mat-cell *matCellDef="let supplier">
+                <mat-chip
+                  [class.active]="supplier.status === 'Active'"
+                  [class.pending]="supplier.status === 'Pending'"
+                  [class.suspended]="supplier.status === 'Suspended'"
+                >
+                  {{ supplier.status }}
+                </mat-chip>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef>Actions</th>
+              <td mat-cell *matCellDef="let supplier">
+                <a
+                  mat-icon-button
+                  [routerLink]="['/suppliers', supplier.id]"
+                  aria-label="View supplier"
+                >
+                  <mat-icon>visibility</mat-icon>
+                </a>
+
+                <a
+                  mat-icon-button
+                  [routerLink]="['/suppliers', supplier.id, 'edit']"
+                  aria-label="Edit supplier"
+                >
+                  <mat-icon>edit</mat-icon>
+                </a>
+
+                <button
+                  mat-icon-button
+                  type="button"
+                  aria-label="Delete supplier"
+                  (click)="deleteSupplier(supplier)"
+                >
+                  <mat-icon color="warn">delete</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+            <tr class="mat-row" *matNoDataRow>
+              <td class="mat-cell" [attr.colspan]="displayedColumns.length">No suppliers found.</td>
+            </tr>
+          </table>
+        </div>
+
+        <mat-paginator
+          [pageSize]="5"
+          [pageSizeOptions]="[5, 10, 25]"
+          showFirstLastButtons
+        ></mat-paginator>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</section>

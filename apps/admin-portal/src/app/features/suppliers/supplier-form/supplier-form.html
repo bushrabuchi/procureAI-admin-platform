@@ -1,0 +1,111 @@
+<section class="supplier-form-page">
+  <div class="page-header">
+    <a mat-icon-button routerLink="/suppliers" aria-label="Back">
+      <mat-icon>arrow_back</mat-icon>
+    </a>
+
+    <div>
+      <h1>{{ isEditMode() ? 'Edit Supplier' : 'Add Supplier' }}</h1>
+      <p>Enter supplier business and contact information.</p>
+    </div>
+  </div>
+
+  @if (notFound()) {
+    <mat-card>
+      <mat-card-content>
+        <p>Supplier not found.</p>
+        <a mat-button routerLink="/suppliers">Back to suppliers</a>
+      </mat-card-content>
+    </mat-card>
+  } @else {
+    <mat-card class="form-card">
+      <mat-card-content>
+        <form [formGroup]="form" (ngSubmit)="saveSupplier()">
+          <h3>Business Information</h3>
+
+          <div class="form-grid">
+            <mat-form-field appearance="outline">
+              <mat-label>Supplier Name</mat-label>
+              <input matInput formControlName="name" />
+
+              @if (form.controls.name.hasError('required')) {
+                <mat-error>Supplier name is required</mat-error>
+              } @else if (form.controls.name.hasError('minlength')) {
+                <mat-error>Minimum 3 characters required</mat-error>
+              }
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Category</mat-label>
+              <mat-select formControlName="category">
+                @for (category of categories; track category) {
+                  <mat-option [value]="category">
+                    {{ category }}
+                  </mat-option>
+                }
+              </mat-select>
+              <mat-error>Select a category</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>City</mat-label>
+              <mat-select formControlName="city">
+                @for (city of cities; track city) {
+                  <mat-option [value]="city">{{ city }}</mat-option>
+                }
+              </mat-select>
+              <mat-error>Select a city</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>VAT Number</mat-label>
+              <input matInput formControlName="vatNumber" maxlength="15" />
+              <mat-hint>15 digits, starts and ends with 3</mat-hint>
+              <mat-error>Enter a valid VAT number format</mat-error>
+            </mat-form-field>
+          </div>
+
+          <h3>Contact Information</h3>
+
+          <div class="form-grid">
+            <mat-form-field appearance="outline">
+              <mat-label>Email Address</mat-label>
+              <mat-icon matPrefix>email</mat-icon>
+              <input matInput type="email" formControlName="email" />
+              <mat-error>Enter a valid email address</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Phone Number</mat-label>
+              <mat-icon matPrefix>phone</mat-icon>
+              <input matInput formControlName="phone" placeholder="+9665XXXXXXXX" />
+              <mat-error>Use format +9665XXXXXXXX</mat-error>
+            </mat-form-field>
+          </div>
+
+          <h3>Supplier Status</h3>
+
+          <mat-form-field appearance="outline" class="status-field">
+            <mat-label>Status</mat-label>
+            <mat-select formControlName="status">
+              @for (status of statuses; track status) {
+                <mat-option [value]="status">
+                  {{ status }}
+                </mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+
+          <div class="form-actions">
+            <a mat-stroked-button routerLink="/suppliers"> Cancel </a>
+
+            <button mat-flat-button type="submit">
+              <mat-icon>save</mat-icon>
+              {{ isEditMode() ? 'Update Supplier' : 'Save Supplier' }}
+            </button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  }
+</section>
