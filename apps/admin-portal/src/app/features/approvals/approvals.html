@@ -1,1 +1,67 @@
-<p>approvals works!</p>
+<section class="approvals-page">
+  <div class="page-heading">
+    <h1>Approval Center</h1>
+    <p>Review and manage purchase order requests.</p>
+  </div>
+
+  <mat-card class="summary-card">
+    <mat-card-content>
+      <mat-icon>pending_actions</mat-icon>
+      <div>
+        <span>Awaiting Approval</span>
+        <h2>{{ service.pendingOrders().length }}</h2>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <h2 class="section-title">Pending Requests</h2>
+
+  <div class="approval-list">
+    @for (order of service.pendingOrders(); track order.id) {
+      <mat-card class="approval-card">
+        <mat-card-content>
+          <div class="approval-main">
+            <div>
+              <h3>PO-{{ order.id.slice(0, 8) }}</h3>
+              <p>{{ order.supplierName }}</p>
+              <p>
+                {{ order.department }} ·
+                {{ order.requestedBy }}
+              </p>
+              <span>{{ order.createdAt | date: 'mediumDate' }}</span>
+            </div>
+
+            <div class="approval-amount">
+              {{ total(order) | currency: 'SAR' }}
+            </div>
+          </div>
+
+          <div class="approval-actions">
+            <a mat-stroked-button [routerLink]="['/purchase-orders', order.id]">
+              <mat-icon>visibility</mat-icon>
+              View Details
+            </a>
+
+            <button mat-stroked-button type="button" (click)="reject(order)">
+              <mat-icon>close</mat-icon>
+              Reject
+            </button>
+
+            <button mat-flat-button type="button" (click)="approve(order)">
+              <mat-icon>check</mat-icon>
+              Approve
+            </button>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    } @empty {
+      <mat-card>
+        <mat-card-content class="empty-state">
+          <mat-icon>task_alt</mat-icon>
+          <h3>All caught up!</h3>
+          <p>No purchase orders are waiting for approval.</p>
+        </mat-card-content>
+      </mat-card>
+    }
+  </div>
+</section>

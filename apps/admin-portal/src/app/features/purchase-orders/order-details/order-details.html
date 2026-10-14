@@ -1,0 +1,111 @@
+<section class="order-details">
+  @if (order(); as item) {
+    <div class="page-header">
+      <div class="page-header-icon">
+        <a mat-button routerLink="/purchase-orders"> <mat-icon>arrow_back</mat-icon> </a>
+        <div class="header-info">
+          <h1>PO-{{ item.id.slice(0, 8) }}</h1>
+          <p>{{ item.supplierName }}</p>
+        </div>
+      </div>
+
+      <mat-chip>{{ item.status }}</mat-chip>
+    </div>
+
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Order Information</mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content>
+        <div class="info-grid">
+          <div>
+            <span>Supplier</span><strong>{{ item.supplierName }}</strong>
+          </div>
+          <div>
+            <span>Requester</span><strong>{{ item.requestedBy }}</strong>
+          </div>
+          <div>
+            <span>Department</span><strong>{{ item.department }}</strong>
+          </div>
+          <div>
+            <span>Created</span><strong>{{ item.createdAt | date: 'medium' }}</strong>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Order Items</mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content>
+        <div class="table-scroll">
+          <table class="items-table">
+            <thead>
+              <tr>
+                <th>Description</th>
+                <th>Quantity</th>
+                <th>Unit Price</th>
+                <th>Line Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (line of item.items; track $index) {
+                <tr>
+                  <td>{{ line.description }}</td>
+                  <td>{{ line.quantity }}</td>
+                  <td>{{ line.unitPrice | currency: 'SAR' }}</td>
+                  <td>{{ line.quantity * line.unitPrice | currency: 'SAR' }}</td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+
+        @if (totals(); as summary) {
+          <div class="totals">
+            <p>Subtotal: {{ summary.subtotal | currency: 'SAR' }}</p>
+            <p>VAT: {{ summary.vat | currency: 'SAR' }}</p>
+            <h3>Total: {{ summary.total | currency: 'SAR' }}</h3>
+          </div>
+        }
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Approval History</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        @for (event of item.history; track $index) {
+          <div class="history-event">
+            <strong>{{ event.action }}</strong>
+            <span>{{ event.actor }} — {{ event.date | date: 'medium' }}</span>
+            @if (event.comment) {
+              <p>{{ event.comment }}</p>
+            }
+          </div>
+        } @empty {
+          <p>No approval actions yet.</p>
+        }
+      </mat-card-content>
+    </mat-card>
+
+    @if (item.status === 'Draft') {
+      <div class="actions">
+        <a mat-stroked-button [routerLink]="['/purchase-orders', item.id, 'edit']">
+          <mat-icon>edit</mat-icon> Edit Draft
+        </a>
+        <button mat-flat-button type="button" (click)="submit()">
+          <mat-icon>send</mat-icon> Submit for Approval
+        </button>
+      </div>
+    }
+  } @else {
+    <mat-card>
+      <mat-card-content>Purchase order not found.</mat-card-content>
+    </mat-card>
+  }
+</section>

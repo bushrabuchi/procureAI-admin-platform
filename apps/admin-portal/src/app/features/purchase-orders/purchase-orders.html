@@ -1,1 +1,146 @@
-<p>purchase-orders works!</p>
+<section class="orders-page">
+  <div class="page-header">
+    <div>
+      <h1>Purchase Orders</h1>
+      <p>Create, manage and track procurement orders.</p>
+    </div>
+
+    <a mat-flat-button routerLink="/purchase-orders/new">
+      <mat-icon>add</mat-icon> New Purchase Order
+    </a>
+  </div>
+
+  <div class="stats-grid">
+    <mat-card>
+      <mat-card-content>
+        <span>Total Orders</span>
+        <h2>{{ service.totalOrders() }}</h2>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card>
+      <mat-card-content>
+        <span>Pending Approval</span>
+        <h2>{{ service.pendingOrders().length }}</h2>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card>
+      <mat-card-content>
+        <span>Approved Orders</span>
+        <h2>{{ service.approvedOrders().length }}</h2>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <mat-card class="table-card">
+    <mat-card-content>
+      <div class="filters">
+        <mat-form-field appearance="outline">
+          <mat-label>Search Orders</mat-label>
+          <mat-icon matPrefix>search</mat-icon>
+          <input matInput [ngModel]="search()" (ngModelChange)="search.set($event)" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Status</mat-label>
+          <mat-select [ngModel]="status()" (ngModelChange)="status.set($event)">
+            @for (
+              value of ['All', 'Draft', 'Pending Approval', 'Approved', 'Rejected'];
+              track value
+            ) {
+              <mat-option [value]="value">{{ value }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="table-scroll">
+        <table mat-table [dataSource]="dataSource" matSort>
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Order</th>
+            <td mat-cell *matCellDef="let order">
+              <a [routerLink]="['/purchase-orders', order.id]"> PO-{{ order.id.slice(0, 8) }} </a>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="supplierName">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Supplier</th>
+            <td mat-cell *matCellDef="let order">
+              {{ order.supplierName }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="department">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Department</th>
+            <td mat-cell *matCellDef="let order">
+              {{ order.department }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="total">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Total</th>
+            <td mat-cell *matCellDef="let order">
+              {{ total(order) | currency: 'SAR' }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="createdAt">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Created</th>
+            <td mat-cell *matCellDef="let order">
+              {{ order.createdAt | date: 'mediumDate' }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef>Status</th>
+            <td mat-cell *matCellDef="let order">
+              <mat-chip>{{ order.status }}</mat-chip>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>Actions</th>
+            <td mat-cell *matCellDef="let order">
+              <a
+                mat-icon-button
+                [routerLink]="['/purchase-orders', order.id]"
+                aria-label="View order"
+              >
+                <mat-icon>visibility</mat-icon>
+              </a>
+
+              @if (order.status === 'Draft') {
+                <a
+                  mat-icon-button
+                  [routerLink]="['/purchase-orders', order.id, 'edit']"
+                  aria-label="Edit order"
+                >
+                  <mat-icon>edit</mat-icon>
+                </a>
+
+                <button
+                  mat-icon-button
+                  type="button"
+                  aria-label="Delete draft"
+                  (click)="deleteOrder(order)"
+                >
+                  <mat-icon>delete</mat-icon>
+                </button>
+              }
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="columns"></tr>
+          <tr mat-row *matRowDef="let row; columns: columns"></tr>
+
+          <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" [attr.colspan]="columns.length">No purchase orders found.</td>
+          </tr>
+        </table>
+      </div>
+
+      <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 25]" showFirstLastButtons />
+    </mat-card-content>
+  </mat-card>
+</section>

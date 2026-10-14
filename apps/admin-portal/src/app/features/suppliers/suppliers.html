@@ -38,7 +38,7 @@
   </div>
   <mat-card class="filter-card">
     <div class="filters">
-      <mat-form-field appearance="outline">
+      <mat-form-field appearance="outline" subscriptSizing="dynamic">
         <mat-label>Search suppliers</mat-label>
         <mat-icon matPrefix>search</mat-icon>
         <input
@@ -48,7 +48,7 @@
           placeholder="Name, email, city..."
         />
       </mat-form-field>
-      <mat-form-field appearance="outline">
+      <mat-form-field appearance="outline" subscriptSizing="dynamic">
         <mat-label>Status</mat-label>
         <mat-select [ngModel]="selectedStatus()" (ngModelChange)="selectedStatus.set($event)">
           <mat-option value="All">All Statuses</mat-option>

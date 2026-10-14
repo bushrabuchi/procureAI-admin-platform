@@ -1,0 +1,141 @@
+<section class="order-form-page">
+  <div class="page-header">
+    <div>
+      <h1>{{ editId() ? 'Edit Purchase Order' : 'New Purchase Order' }}</h1>
+      <p>Create an order and submit it for approval.</p>
+    </div>
+
+    <a mat-stroked-button routerLink="/purchase-orders"> <mat-icon>arrow_back</mat-icon> Back </a>
+  </div>
+
+  @if (notFound()) {
+    <mat-card>
+      <mat-card-content> This draft is unavailable or cannot be edited. </mat-card-content>
+    </mat-card>
+  } @else {
+    <form [formGroup]="form" (ngSubmit)="save(false)">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Order Information</mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content>
+          <div class="form-grid">
+            <mat-form-field appearance="outline">
+              <mat-label>Supplier</mat-label>
+              <mat-select formControlName="supplierId">
+                @for (supplier of suppliers.suppliers(); track supplier.id) {
+                  @if (supplier.status === 'Active') {
+                    <mat-option [value]="supplier.id">
+                      {{ supplier.name }}
+                    </mat-option>
+                  }
+                }
+              </mat-select>
+              <mat-error>Select an active supplier</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Requested By</mat-label>
+              <input matInput formControlName="requestedBy" />
+              <mat-error>Requester is required</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Department</mat-label>
+              <mat-select formControlName="department">
+                @for (department of departments; track department) {
+                  <mat-option [value]="department">
+                    {{ department }}
+                  </mat-option>
+                }
+              </mat-select>
+              <mat-error>Select a department</mat-error>
+            </mat-form-field>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Order Items</mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content>
+          <div formArrayName="items">
+            @for (item of items.controls; track item; let i = $index) {
+              <div class="item-row" [formGroupName]="i">
+                <mat-form-field appearance="outline">
+                  <mat-label>Description</mat-label>
+                  <input matInput formControlName="description" />
+                  <mat-error>Description required</mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                  <mat-label>Quantity</mat-label>
+                  <input matInput type="number" min="1" step="1" formControlName="quantity" />
+                  <mat-error>Enter a positive quantity</mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                  <mat-label>Unit Price (SAR)</mat-label>
+                  <input
+                    matInput
+                    type="number"
+                    min="0.01"
+                    step="0.01"
+                    formControlName="unitPrice"
+                  />
+                  <mat-error>Enter a positive price</mat-error>
+                </mat-form-field>
+
+                <button
+                  mat-icon-button
+                  type="button"
+                  aria-label="Remove item"
+                  [disabled]="items.length === 1"
+                  (click)="removeItem(i)"
+                >
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+            }
+          </div>
+
+          <button mat-stroked-button type="button" (click)="addItem()">
+            <mat-icon>add</mat-icon> Add Item
+          </button>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="summary-card">
+        <mat-card-header>
+          <mat-card-title>Order Summary</mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content>
+          <div class="summary-line">
+            <span>Subtotal</span>
+            <strong>{{ totals().subtotal | currency: 'SAR' }}</strong>
+          </div>
+          <div class="summary-line">
+            <span>VAT (15%)</span>
+            <strong>{{ totals().vat | currency: 'SAR' }}</strong>
+          </div>
+          <div class="summary-line grand-total">
+            <span>Total</span>
+            <strong>{{ totals().total | currency: 'SAR' }}</strong>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <div class="form-actions">
+        <button mat-stroked-button type="submit">Save Draft</button>
+        <button mat-flat-button type="button" (click)="save(true)">
+          <mat-icon>send</mat-icon>
+          Submit for Approval
+        </button>
+      </div>
+    </form>
+  }
+</section>

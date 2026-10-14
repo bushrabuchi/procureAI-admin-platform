@@ -165,13 +165,19 @@ html {
 
   @include mat.table-overrides(
     (
-      background-color: transparent,
+      background-color: var(--app-surface),
+      header-container-height: 56px,
       header-headline-color: var(--app-muted),
       row-item-label-text-color: var(--app-text),
       row-item-outline-color: var(--app-border),
     )
   );
 
+  .mat-mdc-header-cell,
+  .mdc-data-table__header-cell,
+  .mat-mdc-paginator-container {
+    background: var(--app-bg) !important;
+  }
   @include mat.dialog-overrides(
     (
       container-color: var(--app-surface),
