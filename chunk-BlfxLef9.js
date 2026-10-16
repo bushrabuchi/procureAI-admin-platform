@@ -1,1 +1,0 @@
-import{Bn as oE,Ft as _D,rt as Oc,ut as Rc}from"./chunk-CoucQqOS.js";var o=class e{static ɵfac=function(t){return new(t||e)};static ɵcmp=oE({type:e,selectors:[[`app-settings`]],decls:2,vars:0,template:function(t,p){t&1&&(Rc(0,`p`),_D(1,`settings works!`),Oc())},encapsulation:2})};export{o as Settings};
