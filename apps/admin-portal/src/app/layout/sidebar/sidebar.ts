@@ -19,6 +19,8 @@ import { NgFor } from '@angular/common';
   styleUrl: './sidebar.scss',
 })
 export class Sidebar {
+  readonly supplierPortalUrl = 'https://YOUR-ACTUAL-VERCEL-URL.vercel.app';
+
   menu = [
     {
       label: 'Dashboard',

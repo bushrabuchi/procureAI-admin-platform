@@ -100,6 +100,42 @@
   }
 }
 
+.portal-switcher {
+  margin-top: 28px;
+  padding: 16px 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.portal-label {
+  margin: 0 0 12px 10px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: #94a3b8;
+}
+
+.portal-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px;
+  border-radius: 12px;
+  color: #cbd5e1;
+  text-decoration: none;
+  transition: all 0.25s ease;
+
+  &:hover {
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.25), rgba(56, 189, 248, 0.12));
+    color: #fff;
+    transform: translateX(3px);
+  }
+
+  .external-icon {
+    margin-left: auto;
+    font-size: 17px;
+  }
+}
+
 .sidebar-footer {
   margin-top: auto;
   padding: 15px 10px;
