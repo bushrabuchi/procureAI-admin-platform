@@ -19,7 +19,7 @@ import { NgFor } from '@angular/common';
   styleUrl: './sidebar.scss',
 })
 export class Sidebar {
-  readonly supplierPortalUrl = 'https://procure-ai-supplier-portal.vercelapp/';
+  readonly supplierPortalUrl = 'https://procure-ai-supplier-portal.vercel.app/';
 
   menu = [
     {
