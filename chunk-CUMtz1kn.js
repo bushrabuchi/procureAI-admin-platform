@@ -1,0 +1,1 @@
+import{Bn as oE,Ft as _D,rt as Oc,ut as Rc}from"./chunk-CoucQqOS.js";var c=class e{static ɵfac=function(t){return new(t||e)};static ɵcmp=oE({type:e,selectors:[[`app-analytics`]],decls:2,vars:0,template:function(t,l){t&1&&(Rc(0,`p`),_D(1,`analytics works!`),Oc())},encapsulation:2})};export{c as Analytics};
