@@ -239,6 +239,37 @@ select {
   outline: 3px solid var(--app-focus);
   outline-offset: 3px;
 }
+.header-dropdown-panel.mat-mdc-menu-panel {
+  width: 280px;
+  max-width: calc(100vw - 32px);
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  background: var(--card-bg);
+  box-shadow: 0 12px 30px #0002;
+}
+.header-dropdown-panel .mat-mdc-menu-content {
+  padding: 0;
+}
+.header-dropdown-panel .mat-mdc-menu-item {
+  min-height: 44px;
+  padding-inline: 16px;
+  color: var(--text-primary);
+  font-size: 12px;
+}
+.header-dropdown-panel .mat-mdc-menu-item-text {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+.header-dropdown-panel .mat-mdc-menu-item .material-symbols-outlined {
+  width: 20px;
+  color: var(--text-muted);
+  font-size: 18px;
+}
+.header-dropdown-panel .mat-mdc-menu-item:hover {
+  background: var(--hover-bg);
+}
 .muted,
 .page-subtitle {
   color: var(--app-muted);
@@ -251,18 +282,6 @@ select {
 .page-content {
   padding: clamp(16px, 2.5vw, 32px);
   min-width: 0;
-}
-.page-heading,
-.panel-heading,
-.toolbar-actions {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 16px;
-}
-.page-heading {
-  margin-block-end: 24px;
 }
 .page-header {
   display: flex;

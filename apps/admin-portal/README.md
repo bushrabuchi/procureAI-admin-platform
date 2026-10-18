@@ -2,15 +2,75 @@
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.2.2.
 
-## Development server
+# ProcureAI — Angular frontend demonstration
 
-To start a local development server, run:
+ProcureAI demonstrates a procurement administration interface
+with supplier management, purchase orders, approval interactions,
+sample dashboard charts and theme switching.
+
+## Scope
+
+This application uses sample data and browser storage.
+
+Demo entry and route guards simulate session navigation.
+They do not provide backend authentication or authorization.
+
+There is no live AI service or synchronized workflow with
+the separate supplier portal.
+
+Dashboard metrics are independent sample figures.
+
+## Technical choices
+
+- Standalone Angular components
+- Lazy-loaded feature routes
+- Angular Material controls and menus
+- Reactive forms in existing feature forms
+- Signals and computed state
+- Service-based supplier and purchase-order state
+- Browser persistence for sample business data
+- Vitest interaction and workflow tests
+
+## Storage behavior
+
+- Suppliers and orders use localStorage.
+- Demo entry uses sessionStorage.
+- Sign-out removes only the demo session.
+- Sample notifications reset when the workspace reloads.
+- Theme applies throughout the current application visit.
+
+## Validation
+
+The prepared update passed 28 tests across 12 files.
+
+The production build passed with an initial bundle warning:
+520.91 kB against a 500 kB target.
+
+Manual browser, accessibility and deployment checks must be
+recorded separately.
+
+## Run locally
+
+From apps/admin-portal:
 
 ```bash
-ng serve
+npm ci
+npm start
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Open http://localhost:4200 and select Enter demo.
+
+## Test
+
+```bash
+npm test -- --watch=false
+```
+
+## Build
+
+```bash
+npm run build
+```
 
 ## Code scaffolding
 

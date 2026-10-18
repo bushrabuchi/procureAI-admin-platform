@@ -33,50 +33,60 @@
         class="icon-button"
         type="button"
         aria-label="Notifications"
-        [attr.aria-expanded]="notificationsOpen()"
-        (click)="toggleNotifications()"
+        [matMenuTriggerFor]="notificationsMenu"
       >
         <app-icon [img]="icons.Bell"></app-icon>
         <span class="notification-dot"></span>
       </button>
 
-      @if (notificationsOpen()) {
-        <div class="dropdown notifications">
-          <strong>Notifications</strong>
+      <mat-menu #notificationsMenu="matMenu" class="header-dropdown-panel">
+        <div class="notification-menu-content">
+          <div class="notification-menu-heading">
+            <strong>Notifications</strong>
+            <span>Recent activity</span>
+          </div>
           @for (item of notifications; track item) {
-            <p>{{ item }}</p>
+            <div class="notification-item">
+              <span class="notification-indicator" aria-hidden="true"></span>
+              <p>{{ item }}</p>
+            </div>
           }
         </div>
-      }
+      </mat-menu>
     </div>
 
     <div class="dropdown-wrapper">
       <button
+        mat-button
         class="profile-button"
         type="button"
-        [attr.aria-expanded]="profileOpen()"
-        (click)="toggleProfile()"
+        aria-label="Admin profile"
+        [matMenuTriggerFor]="profileMenu"
       >
-        <span class="avatar">AD</span>
-        <span class="profile-name">Admin</span>
-        <app-icon [img]="icons.ChevronDown" [size]="15"></app-icon>
+        <span class="profile-button-content">
+          <span class="avatar">AD</span>
+          <span class="profile-name">Admin</span>
+          <app-icon [img]="icons.ChevronDown" [size]="15"></app-icon>
+        </span>
       </button>
 
-      @if (profileOpen()) {
-        <div class="dropdown profile-dropdown">
-          <div class="profile-dropdown-heading">
-            <span class="avatar">AD</span>
-            <span class="profile-dropdown-identity">
-              <strong>Admin User</strong>
-              <small>Procurement Administrator</small>
-            </span>
-          </div>
-          <a class="dropdown-action" routerLink="/settings">
-            <span class="material-symbols-outlined" aria-hidden="true">manage_accounts</span>
-            <span>{{ 'Account settings' }}</span>
-          </a>
+      <mat-menu #profileMenu="matMenu" class="header-dropdown-panel">
+        <div class="profile-dropdown-heading">
+          <span class="avatar">AD</span>
+          <span class="profile-dropdown-identity">
+            <strong>Admin User</strong>
+            <small>Procurement Administrator</small>
+          </span>
         </div>
-      }
+        <a mat-menu-item routerLink="/settings">
+          <span class="material-symbols-outlined" aria-hidden="true">manage_accounts</span>
+          <span>{{ 'Account settings' }}</span>
+        </a>
+        <button mat-menu-item type="button" (click)="signOut()">
+          <span class="material-symbols-outlined" aria-hidden="true">logout</span>
+          <span>Sign out</span>
+        </button>
+      </mat-menu>
     </div>
   </div>
 </header>

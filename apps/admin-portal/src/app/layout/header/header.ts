@@ -1,20 +1,23 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Bell, ChevronDown, Moon, Search, Sun } from 'lucide';
 import { ThemeService } from '../../core/services/theme.service';
 import { IconComponent } from '../../shared/icon/icon';
-
+import { DemoSessionService } from '../../core/services/demo-session.service';
+import { Router, RouterLink } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
+import { MatMenuModule } from '@angular/material/menu';
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [FormsModule, IconComponent],
+  imports: [FormsModule, RouterLink, MatButtonModule, MatMenuModule, IconComponent],
   templateUrl: './header.html',
   styleUrl: './header.scss',
 })
 export class Header {
+  private readonly session = inject(DemoSessionService);
+  private readonly router = inject(Router);
   readonly icons = { Search, Bell, Moon, Sun, ChevronDown };
-  readonly profileOpen = signal(false);
-  readonly notificationsOpen = signal(false);
   readonly search = signal('');
 
   readonly notifications = [
@@ -25,13 +28,9 @@ export class Header {
 
   constructor(public theme: ThemeService) {}
 
-  toggleProfile() {
-    this.profileOpen.update((v) => !v);
-    this.notificationsOpen.set(false);
-  }
+  signOut(): void {
+    this.session.signOut();
 
-  toggleNotifications() {
-    this.notificationsOpen.update((v) => !v);
-    this.profileOpen.set(false);
+    void this.router.navigate(['/login'], { replaceUrl: true });
   }
 }
