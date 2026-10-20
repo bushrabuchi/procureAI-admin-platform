@@ -1,0 +1,1 @@
+import{K as MD,dr as sE,ot as Oc,yt as Rc}from"./chunk-BPWxYebT.js";var c=class e{static ɵfac=function(t){return new(t||e)};static ɵcmp=sE({type:e,selectors:[[`app-analytics`]],decls:2,vars:0,template:function(t,l){t&1&&(Rc(0,`p`),MD(1,`analytics works!`),Oc())},encapsulation:2})};export{c as Analytics};

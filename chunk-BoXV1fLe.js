@@ -1,1 +1,0 @@
-import{It as _D,Vn as oE,dt as Rc,it as Oc}from"./chunk-Bok-iHM2.js";var o=class e{static ɵfac=function(t){return new(t||e)};static ɵcmp=oE({type:e,selectors:[[`app-settings`]],decls:2,vars:0,template:function(t,p){t&1&&(Rc(0,`p`),_D(1,`settings works!`),Oc())},encapsulation:2})};export{o as Settings};
