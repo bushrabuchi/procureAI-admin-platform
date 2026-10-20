@@ -22,37 +22,6 @@
   margin-bottom: 45px;
 }
 
-.brand-icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 12px;
-  display: grid;
-  place-items: center;
-  background: var(--app-primary);
-  color: #ccd0cf;
-  font-size: 24px;
-  font-weight: 800;
-}
-
-.brand-name {
-  color: var(--app-text);
-  font-size: 20px;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-
-  span {
-    color: var(--app-primary);
-  }
-
-  small {
-    display: block;
-    font-size: 9px;
-    letter-spacing: 1.3px;
-    font-weight: 300;
-    color: var(--app-text);
-  }
-}
-
 .menu-label {
   padding: 0 14px;
   font-size: 10px;

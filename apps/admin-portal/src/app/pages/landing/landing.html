@@ -1,0 +1,193 @@
+<header class="header">
+  <div class="container nav">
+    <a aria-label="ProcureAI home" class="brand" href="#home">
+      <span class="logo brand-logo-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M12 2.75 14.2 9.8 21.25 12l-7.05 2.2L12 21.25 9.8 14.2 2.75 12 9.8 9.8 12 2.75Z" />
+          <circle cx="19.5" cy="4.5" r="1.25" />
+          <circle cx="4.5" cy="19.5" r="1.25" />
+        </svg>
+      </span>
+      <span class="brand-wordmark">Procure<span class="brand-wordmark-accent">AI</span></span>
+    </a>
+    <nav aria-label="Main navigation" class="links">
+      <a href="#features">Features</a><a href="#portals">Explore portals</a
+      ><a href="#workflow">How it works</a><a href="#about">About the demo</a>
+    </nav>
+    <div class="actions">
+      <a class="btn secondary" href="#portals">Explore</a
+      ><a class="btn primary" href="#portals">Open demo ↗</a
+      ><button
+        (click)="toggleMenu()"
+        [attr.aria-expanded]="menuOpen()"
+        aria-label="Toggle navigation"
+        class="menu-toggle"
+        type="button"
+      >
+        ☰
+      </button>
+    </div>
+  </div>
+</header>
+<nav aria-label="Mobile navigation" class="mobile-links">
+  @if (menuOpen()) {
+    <a href="#features" (click)="closeMenu()">Features</a>
+    <a href="#portals" (click)="closeMenu()">Explore portals</a>
+    <a href="#workflow" (click)="closeMenu()">How it works</a>
+    <a href="#about" (click)="closeMenu()">About the demo</a>
+  }
+</nav>
+<main>
+  <section class="hero" id="home">
+    <div class="container hero-grid">
+      <div>
+        <span class="eyebrow"><span class="dot"></span> PROCUREMENT WORKSPACE · FRONTEND DEMO</span>
+        <h1>Procurement made <span class="gradient">clearer, faster, smarter.</span></h1>
+        <p class="lead">
+          Meet ProcureAI: a modern procurement interface for managing requests for quotations,
+          exploring supplier responses, and following purchasing workflows. Experience separate
+          workspaces for procurement teams and suppliers.
+        </p>
+        <div class="hero-actions">
+          <a class="btn primary" href="#portals">Explore the two portals →</a
+          ><a class="btn secondary" href="#features">See platform features</a>
+        </div>
+        <p class="fine">✧ Frontend portfolio demonstration · Sample data and workflows</p>
+      </div>
+      <div
+        aria-label="Illustrative procurement dashboard with sample RFQs and summary cards"
+        class="visual"
+        role="img"
+      >
+        <div class="window"><i></i><i></i><i></i></div>
+        <div class="dash-top">
+          <strong>Procurement overview</strong><span class="chip">● Demo workspace</span>
+        </div>
+        <div class="stats">
+          @for (stat of stats; track stat.label) {
+            <div class="stat">
+              <small>{{ stat.label }}</small
+              ><b>{{ stat.value }}</b>
+            </div>
+          }
+        </div>
+        <div class="mini-card">
+          <h4>Recent requests · Illustrative data</h4>
+          @for (rfq of recentRfqs; track rfq.reference) {
+            <div class="rfq">
+              <span
+                ><strong>{{ rfq.title }}</strong
+                ><small>{{ rfq.reference }}</small></span
+              ><span class="tag" [class.green]="rfq.status === 'Open'">{{ rfq.status }}</span>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section alt" id="features">
+    <div class="container">
+      <div class="section-heading">
+        <span class="kicker">Platform experience</span>
+        <h2>Everything in one procurement workspace</h2>
+        <p>
+          Explore practical procurement screens and interactions designed to make common tasks easy
+          to follow.
+        </p>
+      </div>
+      <div class="cards">
+        @for (feature of features; track feature.title) {
+          <article class="card">
+            <span class="icon" aria-hidden="true">{{ feature.icon }}</span>
+            <h3>{{ feature.title }}</h3>
+            <p>{{ feature.description }}</p>
+          </article>
+        }
+      </div>
+    </div>
+  </section>
+  <section class="section" id="portals">
+    <div class="container">
+      <div class="section-heading">
+        <span class="kicker">Choose your workspace</span>
+        <h2>One idea. Two tailored portals.</h2>
+        <p>Choose your existing Admin or Supplier login page to explore the demo.</p>
+      </div>
+      <div class="portal-grid">
+        <article class="portal">
+          <span class="eyebrow">BUYER / PROCUREMENT TEAM</span>
+          <h3>Admin Portal</h3>
+          <p>
+            Explore the procurement-side dashboard, RFQ management screens, and the buyer
+            experience.
+          </p>
+          <a class="btn primary" id="admin-link" routerLink="/login">Admin Sign In →</a>
+        </article>
+        <article class="portal supplier">
+          <span class="eyebrow">SUPPLIER / VENDOR</span>
+          <h3>Supplier Portal</h3>
+          <p>
+            Explore the supplier-facing workspace, designed to support RFQ visibility and
+            quotation-related interactions.
+          </p>
+          <a
+            [href]="supplierPortalUrl"
+            class="btn primary"
+            id="supplier-link"
+            rel="noopener noreferrer"
+            target="_blank"
+            >Supplier Sign In ↗</a
+          >
+        </article>
+      </div>
+      <p class="fine">
+        The supplier URL must be verified against your deployment. Admin login uses the existing
+        Angular /login route.
+      </p>
+    </div>
+  </section>
+  <section class="section alt" id="workflow">
+    <div class="container">
+      <div class="section-heading">
+        <span class="kicker">Intended business process</span>
+        <h2>From RFQ to purchase order</h2>
+        <p>
+          This illustrates the target procurement process, not a fully synchronized backend
+          workflow.
+        </p>
+      </div>
+      <div class="steps">
+        @for (step of workflow; track step.title; let i = $index) {
+          <div class="step">
+            <b>{{ (i + 1).toString().padStart(2, '0') }}</b>
+            <h3>{{ step.title }}</h3>
+            <p>{{ step.description }}</p>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+  <section class="section" id="about">
+    <div class="container">
+      <div class="section-heading">
+        <span class="kicker">About this project</span>
+        <h2>Built to demonstrate modern frontend engineering</h2>
+      </div>
+      <div class="notice">
+        <strong>ProcureAI is a portfolio frontend demonstration.</strong> The admin and supplier
+        portals showcase interface design, navigation, and procurement-oriented workflows. Some data
+        and interactions are simulated. Real-time synchronization, production authentication,
+        enterprise integrations, and autonomous AI are not represented as implemented features.
+      </div>
+    </div>
+  </section>
+</main>
+<footer class="footer">
+  <div class="container footer-inner">
+    <span>© 2026 ProcureAI · Frontend demonstration project</span
+    ><span
+      ><a href="#features">Features</a><a href="#portals">Portals</a
+      ><a href="#about">Project scope</a></span
+    >
+  </div>
+</footer>

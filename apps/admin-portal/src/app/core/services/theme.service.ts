@@ -2,11 +2,13 @@ import { Injectable, effect, signal } from '@angular/core';
 
 @Injectable({ providedIn: 'root' })
 export class ThemeService {
-  readonly isDark = signal(false);
+  readonly isDark = signal(true);
 
   constructor() {
     effect(() => {
-      document.documentElement.classList.toggle('dark-theme', this.isDark());
+      const dark = this.isDark();
+      document.documentElement.classList.toggle('dark-theme', dark);
+      document.documentElement.classList.toggle('light-theme', !dark);
     });
   }
 

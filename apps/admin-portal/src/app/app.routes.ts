@@ -2,6 +2,10 @@ import { Routes } from '@angular/router';
 import { demoSessionGuard } from './core/demo-session.guard';
 export const routes: Routes = [
   {
+    path: '',
+    loadComponent: () => import('./pages/landing/landing').then((m) => m.Landing),
+  },
+  {
     path: 'login',
     loadComponent: () => import('./features/demo-login/demo-login').then((m) => m.DemoLogin),
   },

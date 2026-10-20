@@ -1,9 +1,17 @@
 <aside class="sidebar">
   <div class="brand">
-    <div class="brand-icon">P</div>
-    <div class="brand-name">
-      Procure<span>AI</span>
-      <small>ENTERPRISE PLATFORM</small>
+    <div class="brand-icon brand-logo-mark" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none">
+        <path d="M12 2.75 14.2 9.8 21.25 12l-7.05 2.2L12 21.25 9.8 14.2 2.75 12 9.8 9.8 12 2.75Z" />
+        <circle cx="19.5" cy="4.5" r="1.25" />
+        <circle cx="4.5" cy="19.5" r="1.25" />
+      </svg>
+    </div>
+    <div>
+      <div class="brand-name brand-wordmark">
+        Procure<span class="brand-wordmark-accent">AI</span>
+      </div>
+      <small class="brand-context">ENTERPRISE PLATFORM</small>
     </div>
   </div>
 
@@ -20,19 +28,6 @@
       <span>{{ item.label }}</span>
     </a>
   </nav>
-
-  <div class="portal-switcher">
-    <p class="portal-label">OTHER PORTALS</p>
-
-    <a class="portal-link" [href]="supplierPortalUrl" target="_blank" rel="noopener noreferrer">
-      <span class="portal-icon material-symbols-outlined" aria-hidden="true">storefront</span>
-      <span class="portal-link-copy">
-        <strong>Supplier Portal</strong>
-        <small>Open supplier workspace</small>
-      </span>
-      <span class="external-icon material-symbols-outlined" aria-hidden="true">open_in_new</span>
-    </a>
-  </div>
 
   <div class="sidebar-footer">
     <div class="workspace-badge">Enterprise Workspace</div>

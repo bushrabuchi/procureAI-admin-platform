@@ -1,6 +1,6 @@
 @use '@angular/material' as mat;
 html {
-  color-scheme: light;
+  color-scheme: dark;
   @include mat.theme(
     (
       color: (
@@ -12,17 +12,74 @@ html {
     )
   );
 
-  --app-bg: #f0eaf9;
-  --app-surface: #faf7ff;
-  --app-glass: rgba(255, 255, 255, 0.72);
+  --app-bg: #080f20;
+  --app-surface: #101b30;
+  --app-card-background: #151e32;
+  --app-glass: var(--app-card-background);
+  --app-glass-top: #1d2d50;
+  --app-text: #f4f8ff;
+  --app-muted: #a6b5cc;
+  --app-border: #2a3b56;
+  --app-primary: #9986ff;
+  --app-primary-end: #48d9ef;
+  --app-accent: #48d9ef;
+  --app-on-primary: #091326;
+  --app-highlight: #24345c;
+  --app-halo: rgba(153, 134, 255, 0.18);
+  --app-halo-cyan: rgba(72, 217, 239, 0.12);
+  --app-shadow: 0 20px 55px rgba(0, 0, 0, 0.3);
+  --app-glow: 0 0 25px rgba(167, 117, 255, 0.26);
+  --app-focus: #48d9ef;
+  --app-success: #80e2cb;
+  --app-success-bg: #194b45;
+  --app-warning: #e7b75b;
+  --app-warning-bg: #453a27;
+  --app-danger: #fb7f88;
+  --app-danger-bg: #492d3a;
+  --app-info: #9ec6ff;
+  --app-info-bg: #283d62;
+  --app-brand-foreground: #091326;
+  --app-surface-raised: #192941;
+  --app-section-bg: #101a2d;
+  --app-header-bg: rgba(9, 19, 38, 0.94);
+  --app-line-strong: #314360;
+  --app-text-subtle: #91a6c2;
+  --app-text-secondary: #b9c6d9;
+  --app-label-muted: #9aacc4;
+  --app-accent-bright: #64d7ec;
+  --app-violet-bright: #c1a9ff;
+  --app-success-bright: #48ddc2;
+  --app-success-text: #74e6cd;
+  --app-success-soft: #1b4b49;
+  --app-success-icon: #5bc8a6;
+  --app-window-control: #536582;
+  --app-hero-background:
+    radial-gradient(ellipse at 75% 25%, rgba(35, 71, 117, 0.52), transparent 45%),
+    radial-gradient(ellipse at 15% 80%, rgba(50, 41, 99, 0.47), transparent 45%), #0a1428;
+  --app-chart-violet: #be9aff;
+  --app-chart-cyan: var(--app-accent);
+  --app-chart-mint: #8be9ad;
+}
+
+html.dark-theme {
+  color-scheme: dark;
+}
+
+html.light-theme {
+  color-scheme: light;
+  --app-bg: #f5f6fb;
+  --app-surface: #ffffff;
+  --app-card-background: #ffffff;
+  --app-glass: var(--app-card-background);
   --app-glass-top: rgba(255, 255, 255, 0.9);
-  --app-text: #251d38;
-  --app-muted: #625773;
-  --app-border: rgba(94, 65, 135, 0.22);
+  --app-text: #1b2437;
+  --app-muted: #64748b;
+  --app-border: rgba(71, 85, 105, 0.18);
   --app-primary: #6941bb;
   --app-primary-end: #453aa5;
+  --app-accent: #087f96;
   --app-on-primary: #ffffff;
-  --app-highlight: #eee5ff;
+  --app-highlight: #eef0ff;
   --app-halo: rgba(121, 76, 204, 0.16);
   --app-halo-cyan: rgba(48, 173, 195, 0.09);
   --app-shadow: 0 12px 36px rgba(59, 35, 94, 0.09);
@@ -34,43 +91,54 @@ html {
   --app-warning-bg: #fff0cd;
   --app-danger: #ab2540;
   --app-danger-bg: #ffe7ed;
+  --app-info: #9ec6ff;
+  --app-info-bg: #e8f0ff;
+  --app-brand-foreground: #ffffff;
+  --app-surface-raised: #ffffff;
+  --app-section-bg: #f0f2f8;
+  --app-header-bg: rgba(255, 255, 255, 0.94);
+  --app-line-strong: rgba(71, 85, 105, 0.24);
+  --app-text-subtle: #64748b;
+  --app-text-secondary: #526176;
+  --app-label-muted: #64748b;
+  --app-accent-bright: #087f96;
+  --app-violet-bright: #6941bb;
+  --app-success-bright: #176843;
+  --app-success-text: #176843;
+  --app-success-soft: #e1f4e9;
+  --app-success-icon: #188654;
+  --app-window-control: #64748b;
+  --app-hero-background:
+    radial-gradient(ellipse at 75% 25%, rgba(105, 65, 187, 0.12), transparent 45%),
+    radial-gradient(ellipse at 15% 80%, rgba(8, 127, 150, 0.1), transparent 45%), #f5f6fb;
   --app-chart-violet: #794bd0;
   --app-chart-cyan: #087f96;
   --app-chart-mint: #188654;
 }
 
-html.dark-theme {
-  color-scheme: dark;
-  --app-bg: #080f20;
-  --app-surface: #151e32;
-  --app-glass: rgba(22, 31, 50, 0.86);
-  --app-glass-top: rgba(48, 59, 78, 0.89);
-  --app-text: #f1f3fc;
-  --app-muted: #b6bfd3;
-  --app-border: rgba(185, 201, 230, 0.23);
-  --app-primary: #d3bcff;
-  --app-primary-end: #b4dfff;
-  --app-on-primary: #201337;
-  --app-highlight: #2b2546;
-  --app-halo: rgba(151, 103, 236, 0.14);
-  --app-halo-cyan: rgba(83, 208, 229, 0.1);
-  --app-shadow: 0 14px 40px rgba(0, 0, 0, 0.32);
-  --app-glow: 0 0 25px rgba(167, 117, 255, 0.26);
-  --app-focus: #b6e7ff;
-  --app-success: #9aefbc;
-  --app-success-bg: #183a30;
-  --app-warning: #ffdb8c;
-  --app-warning-bg: #42351e;
-  --app-danger: #ffb0bf;
-  --app-danger-bg: #442430;
-  --app-chart-violet: #be9aff;
-  --app-chart-cyan: #8edeea;
-  --app-chart-mint: #8be9ad;
-}
-
 // Preserve the variable contract used by your existing ProcureAI components.
 :root {
   --font-sans: 'Inter', 'Segoe UI', Roboto, Arial, sans-serif;
+  --brand-primary: var(--app-primary);
+  --brand-accent: var(--app-accent);
+  --brand-violet: var(--app-primary);
+  --brand-cyan: var(--app-accent);
+  --brand-mark-background: var(--brand-gradient);
+  --brand-mark-size: 40px;
+  --brand-radius: 12px;
+  --card-radius: 16px;
+  --button-radius: 12px;
+  --input-radius: 10px;
+  --brand-gradient: linear-gradient(135deg, var(--brand-violet), var(--brand-cyan));
+  --bg: var(--app-bg);
+  --surface: var(--app-surface);
+  --card: var(--app-card-background);
+  --line: var(--app-border);
+  --text: var(--app-text);
+  --muted: var(--app-muted);
+  --cyan: var(--app-accent);
+  --violet: var(--app-primary);
+  --blue: #5478ff;
   --page-bg: var(--app-bg);
   --card-bg: var(--app-glass);
   --sidebar-bg: var(--app-glass);
@@ -86,16 +154,55 @@ html.dark-theme {
   --sidebar-text: var(--app-muted);
   --status-approved: var(--app-success);
   --status-approved-soft: var(--app-success-bg);
-  --status-processing: #116580;
-  --status-processing-soft: #def3fa;
+  --status-processing: var(--app-info);
+  --status-processing-soft: var(--app-info-bg);
   --status-pending: var(--app-warning);
   --status-pending-soft: var(--app-warning-bg);
   --status-rejected: var(--app-danger);
   --status-rejected-soft: var(--app-danger-bg);
 }
-:root.dark-theme {
-  --status-processing: #a0e2f2;
-  --status-processing-soft: #1b3545;
+
+.brand-logo-mark {
+  display: grid;
+  width: var(--brand-mark-size);
+  height: var(--brand-mark-size);
+  flex: 0 0 var(--brand-mark-size);
+  place-items: center;
+  overflow: hidden;
+  border-radius: var(--brand-radius);
+  background: var(--brand-mark-background);
+  color: var(--app-brand-foreground);
+}
+
+.brand-logo-mark svg {
+  width: 25px;
+  height: 25px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.6;
+}
+
+.brand-wordmark {
+  color: var(--app-text);
+  font-size: 20px;
+  font-weight: 750;
+  letter-spacing: -0.04em;
+  line-height: 1.2;
+}
+
+.brand-wordmark-accent {
+  color: var(--brand-cyan);
+}
+
+.brand-context {
+  display: block;
+  margin-top: 3px;
+  color: var(--text-muted);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
 }
 html {
   @include mat.theme-overrides(
@@ -124,10 +231,10 @@ html {
 
   @include mat.button-overrides(
     (
-      filled-container-shape: 12px,
-      protected-container-shape: 12px,
-      outlined-container-shape: 12px,
-      text-container-shape: 12px,
+      filled-container-shape: var(--button-radius),
+      protected-container-shape: var(--button-radius),
+      outlined-container-shape: var(--button-radius),
+      text-container-shape: var(--button-radius),
       filled-container-height: 44px,
       protected-container-height: 44px,
       outlined-container-height: 44px,
@@ -155,9 +262,9 @@ html {
   @include mat.card-overrides(
     (
       elevated-container-color: var(--app-surface),
-      elevated-container-shape: 20px,
+      elevated-container-shape: var(--card-radius),
       outlined-container-color: transparent,
-      outlined-container-shape: 20px,
+      outlined-container-shape: var(--card-radius),
       outlined-outline-color: var(--app-border),
       subtitle-text-color: var(--app-muted),
     )
