@@ -1,4 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { provideRouter } from '@angular/router';
+
 import { Suppliers } from './suppliers';
 
 describe('Suppliers', () => {
@@ -8,10 +11,13 @@ describe('Suppliers', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [Suppliers],
+      providers: [provideRouter([])],
     }).compileComponents();
 
     fixture = TestBed.createComponent(Suppliers);
+
     component = fixture.componentInstance;
+
     await fixture.whenStable();
   });
 

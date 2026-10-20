@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { demoSessionGuard } from './core/demo-sessio.guard';
+import { demoSessionGuard } from './core/demo-session.guard';
 export const routes: Routes = [
   {
     path: 'login',
